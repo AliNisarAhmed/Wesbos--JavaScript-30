@@ -32,16 +32,44 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+    const fifteen = inventors.filter(inv => {
+      return inv.year >= 1500 && inv.year < 1600;
+    })
+
+    console.table(fifteen);
+
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+
+    const firstAndLast = inventors.map(inv => {
+      return `${inv.first} ${inv.last}`;
+    });
+
+    console.table(firstAndLast);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    const birthdate = inventors.sort( (a, b) => {
+      return a.year - b.year;
+    });
+
+    console.table(birthdate);
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
 
+    const totalYears = inventors.reduce( (a, inv) => {
+      return a + inv.passed - inv.year;
+    }, 0)
+
+    console.log('totalYears :', totalYears);
+
     // 5. Sort the inventors by years lived
+
+    const sortedByLife = inventors.sort( (a, b) => (a.passed - a.year) > (b.passed - b.year) ? -1: 1 );
+
+    console.table(sortedByLife);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -50,9 +78,29 @@
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    const lastName = people.sort( (a, b) => {
+      let lastNameA = a.split(' ')[1];
+      let lastNameB = b.split(' ')[1];
+      return lastNameA > lastNameB ? 1: -1;
+    })
+
+    console.log("lastName: ", lastName);
+                     
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    const dataObj = data.reduce( (a, x) => {
+      if (Object.keys(a).includes(x)) {
+        a[x] += 1;
+      } else {
+        a[x] = 1;
+      }
+        return a;
+    }, {});
+
+    console.log(dataObj);
 
   </script>
 </body>
